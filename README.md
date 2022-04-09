@@ -26,3 +26,11 @@ Team Name: **Error Makers**
 ## User Stories
 
 > [User Stories](https://trello.com/b/dPPTjuco/project-management)
+
+## Domain Modeling
+
+![Domain Modeling](./assets/domain-modeling.jpg)
+
+## Database Schema Diagram
+
+![Database Schema Diagram](./assets/isupport_sql.png)
