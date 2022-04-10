@@ -1,7 +1,7 @@
 const base64 = require("base-64");
 const bcrypt = require("bcrypt");
 const { User } = require("../models/index");
-const errorHandler = require("../../middleware/500");
+const errorHandler = require("../500");
 
 async function basicAuth(req, res, next) {
   if (req.headers["authorization"]) {
