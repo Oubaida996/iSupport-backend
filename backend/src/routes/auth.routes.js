@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const db = require('../db/models/users');
 const bcrypt = require('bcrypt');
@@ -42,5 +42,3 @@ function signinFunc(request, response) {
 }
 
 module.exports = router;
-
-
