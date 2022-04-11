@@ -1,11 +1,11 @@
 "use strict";
-
+require('dotenv').config();
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const users = require("./users");
 const basename = path.basename(__filename);
-const POSTGRES_URI =
+const POSTGRES_URI = 
   process.env.NODE_ENV === "test" ? "sqlite:memory:" : process.env.DATABASE_URL;
 
 let sequelizeOptions =
