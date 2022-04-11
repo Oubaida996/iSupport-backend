@@ -1,15 +1,14 @@
 'use strict';
 const express = require('express');
-const {test} = require('../model/index');
+const database = require('../src/db/models/index');
 const router = express.Router();
 
 router.get("/communites", getAlCommunites);
 
-function getAlCommunites(req,res){
-    // let allData = await test.findAll();;
-    // res.status(200).send(allData);
+async function getAlCommunites(req,res){
+    let allData = await database.communities.findAll();
+    res.status(200).send(allData);
+    // res.send('test comminites');
 }
-
-
 
 module.exports = router;

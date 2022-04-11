@@ -1,13 +1,22 @@
 'use strict';
 const express = require('express');
-const {test} = require('../model/index');
+const database = require('../src/db/models/index');
 const router = express.Router();
 
-router.get("/community", getCommunity);
+router.get("/community/:id", getCommunity);
+// router.post("/community", createCommunity);
 
-function getCommunity(req,res){
-    // let allData = await test.findOne({ where: { id: id } });
-    // res.status(200).send(allData);
+// async function createCommunity(req,res){
+//     let createdData = await database.communities.create(req.body);
+//     res.status(201).send(createdData);;
+//     // res.send('test');
+// }
+
+async function getCommunity(req,res){
+    let id = req.params.id;
+    let allData = await database.communities.findOne({ where: { id: id } });
+    res.status(200).send(allData);
+    res.send('test');
 }
 
 
