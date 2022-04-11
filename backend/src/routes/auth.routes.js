@@ -2,14 +2,29 @@
 
 const express = require('express');
 const router = express.Router();
-const db  = require('../db/models/users');
+const db = require('../db/models/users');
 const bcrypt = require('bcrypt');
 const basicAuth = require('../middleware/auth/basicAuth');
+const UserControll = require('../controllers/userControll')
+const check = require('check');
 
-
+// Routes:
+// signin,signup
 router.post('/signup', signupFunc);
-router.post('/signin', basicAuth(Users), signinFunc);
+router.post('/signin', basicAuth(db.Users), signinFunc);
+//logout
+router.get('/:id/logout',UserControll.userLogout);
 
+// delete user
+router.delete('/:id',UserControll.DeleteUser);
+
+// update user data
+router.put('/:id',UserControll.updateUser);
+
+// change  passworde
+router.post('/:id/change',[check('password').matches(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/).withMessage('must contain at least 8 char character')],UserControll.changePassword)
+
+// function:
 // signup Function
 async function signupFunc(request, response) {
     try {
@@ -21,6 +36,7 @@ async function signupFunc(request, response) {
     }
 }
 
+// signin Function
 function signinFunc(request, response) {
     response.status(200).json(request.db.Users);
 }

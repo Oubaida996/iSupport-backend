@@ -14,7 +14,7 @@ exports.DeleteUser = (req, res, next) => {
     })
 }
 
-// change user data
+// update user data
 exports.updateUser = (req, res, next) => {
     db.Users.update({ username: req.body.name, firstName: req.body.fname, lastName: req.body.lname, email: req.body.email }).exec().then(result => {
         res.status(200).json({ message: 'user have been Updeted' })
