@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       lastName: DataTypes.STRING,
       email: DataTypes.STRING,
       role: {
-        type: DataTypes.ENUM("admin", "writer", "editor", "user"),
+        type: DataTypes.ENUM("admin", "moderator", "user"),
         defaultValue: "user",
       },
       token: {
@@ -41,10 +41,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.VIRTUAL,
         get() {
           const acl = {
-            user: ["read"],
-            writer: ["read", "create"],
-            editor: ["read", "create", "update"],
-            admin: ["read", "create", "update", "delete"],
+            user: ["read", "create"],
+            moderator: ["read", "create", "update", "delete"],
+            admin: [
+              "read",
+              "create",
+              "update",
+              "delete",
+              "delete all",
+              "edit all",
+            ],
           };
           return acl[this.role];
         },
