@@ -15,9 +15,7 @@ async function trendingCommity(req, res) {
         ORDER BY COUNT(posts) DESC
         LIMIT 5;`
   );
-  console.log(results, "888888");
-  let getTrendingCommunity = await database.communities.findAll();
-  res.status(201).send(getTrendingCommunity);
+  res.status(201).json(results);
   // res.send(req.body);
 }
 

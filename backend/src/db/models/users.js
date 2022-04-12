@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const API_SECRET = process.env.API_SECRET || "some secret word";
 
-const { Model } = require("sequelize");
+const { Model, INTEGER } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Users.init(
     {
+      user_id: {
+        primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
