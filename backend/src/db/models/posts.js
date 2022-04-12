@@ -13,6 +13,7 @@ const Posts = (db, DataTypes) =>
     author: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      // foreginKey: true,
     },
     community_id: {
       type: DataTypes.INTEGER,
