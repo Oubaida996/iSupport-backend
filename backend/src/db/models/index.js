@@ -1,11 +1,11 @@
 "use strict";
-require('dotenv').config();
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const users = require("./users");
 const basename = path.basename(__filename);
-const POSTGRES_URI = 
+const POSTGRES_URI =
   process.env.NODE_ENV === "test" ? "sqlite:memory:" : process.env.DATABASE_URL;
 
 let sequelizeOptions =
@@ -57,6 +57,7 @@ db.posts.belongsTo(db.communities,{foreignKey: 'community_id' ,targetKey :'id'})
 
  db.communities.hasMany(db.moderators, { foreginKey: "community_id",sourceKey :'id' });
  db.moderators.belongsTo(db.communities,{foreignKey: 'community_id' ,targetKey :'id'});
+
 
 
 db.sequelize = sequelize;

@@ -8,7 +8,7 @@ const postsRouter =require('../src/routes/posts');
 
 // const notFoundHandler = require("./middleware/404");
 // const errorHandler = require("./middleware/500");
-// const authRoute = require("./auth/router");
+const authRoute = require("./routes/leaderborad");
 const cors = require("cors");
 // express app
 const app = express();
@@ -36,6 +36,7 @@ app.use(postsRouter);
 
 
 // app.use(authRoute);
+
 
 // app.use("*", notFoundHandler);
 // app.use(errorHandler);
