@@ -3,12 +3,13 @@ const express = require("express");
 const database = require("../db/models/index");
 const router = express.Router();
 
-router.get("/communites", getAlCommunites);
+router.get("/communities", getAlCommunities);
 
-async function getAlCommunites(req, res) {
-  let allData = await database.communities.findAll();
+
+async function getAlCommunities(req, res) {
+  let allData = await database.communities.findAll({include :[database.users ,database.posts]});
   res.status(200).send(allData);
-  // res.send('test comminites');
+  
 }
 
 module.exports = router;
