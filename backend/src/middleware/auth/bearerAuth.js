@@ -20,6 +20,7 @@ const bearerAuth = async (req, res, next) => {
 
       if (test) {
         req.authorizedUser = user;
+        req.username=parsedToken.data;
         next();
       } else {
         res.status(500).send("please login again");
