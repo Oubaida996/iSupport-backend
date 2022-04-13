@@ -1,17 +1,23 @@
 'use strict';
-const express = require('express');
+
+
 const bcrypt = require('bcrypt');
 const validationResult = require('express-validator');
-const db = require('../db/models/users');
+const database = require('../db/models/index');
 
 // delete user
-exports.DeleteUser = (req, res, next) => {
-    db.Users.remove({ id: req.params.id }).exec().then(result => {
-        res.status(200).json({ message: 'user have been deleted' });
-    }).catch(error => {
+exports.DeleteUser =async (req, res, next) => {
+    let uid = parseInt(req.params.id);  
+    try {
+        let fetchedUser = await database.users.findOne({ where: { id: uid },include :[database.communities ,database.posts]  });
+        await database.users.destroy({ where: { id: uid } });
+       res.status(201).json({fetchedUser :fetchedUser,message :'deleted successfully' });
+    } catch(error)  {
         console.log(error);
         res.status(500).json({ error: error });
-    })
+    }
+     
+    
 }
 
 // update user data
@@ -71,16 +77,22 @@ exports.allUsers = (req, res, next) => {
 
 // when the session is end logout the user
 exports.userLogout = (req, res, next) => {
-    if (req.session) {
-        req.session.destroy(error => {
-            if (error) {
-                res.status(500).json({ error: error })
-                return next(error);
+    console.log('******');
+    // console.log(req);
+    return res.redirect('/');
+    // if (req.session) {
+    //     console.log('after if');
+    //     req.session.destroy(error => {
+    //         if (error) {
+    //             console.log('0000000000');
+    //             res.status(500).json({ error: error })
+    //             return next(error);
 
-            }
-            else {
-                return res.redirect('/')
-            }
-        })
-    }
+    //         }
+    //         else {
+    //             res.send('dddddddddddddd');
+    //             // return res.redirect('/');
+    //         }
+    //     })
+    // }
 }

@@ -4,6 +4,10 @@ const userRouter =require('../src/routes/users');
 const communityRouter =require('../src/routes/communityRoutes');
 const communitiesRouter =require('../src/routes/communitiesRoute');
 const postsRouter =require('../src/routes/posts');
+// const leaderBordRouter =require('../src/routes/leaderborad');
+const authRouter = require('../src/routes/auth.routes');
+const searchRouter = require('../src/routes/searchRoute');
+
 
 
 // const notFoundHandler = require("./middleware/404");
@@ -33,9 +37,11 @@ app.use(userRouter);
 app.use(communityRouter);
 app.use(communitiesRouter);
 app.use(postsRouter);
+// app.use(leaderBordRouter);
+app.use(authRouter);
+app.use(searchRouter);
 
 
-// app.use(authRoute);
 
 
 // app.use("*", notFoundHandler);

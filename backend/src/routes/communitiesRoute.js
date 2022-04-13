@@ -2,8 +2,10 @@
 const express = require("express");
 const database = require("../db/models/index");
 const router = express.Router();
+const aclAuth =require('../middleware/auth/aclAuth');
+const bearerAuth =require('../middleware/auth/bearerAuth');
 
-router.get("/communities", getAlCommunities);
+router.get("/communities",bearerAuth, aclAuth('edit all') ,getAlCommunities);
 
 
 async function getAlCommunities(req, res) {

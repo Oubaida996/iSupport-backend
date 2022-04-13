@@ -2,9 +2,12 @@
 const express = require("express");
 const database = require("../db/models/index");
 const router = express.Router();
+const aclAuth =require('../middleware/auth/aclAuth');
+const bearerAuth =require('../middleware/auth/bearerAuth');
 
-router.get("/community/:id", getCommunity);
-router.post("/community", createCommunity);
+
+router.get("/community/:id",bearerAuth, aclAuth('read') ,getCommunity);
+router.post("/community",bearerAuth, aclAuth('create') , createCommunity);
 
 async function createCommunity(req, res) {
   let body = req.body;
