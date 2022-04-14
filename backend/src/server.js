@@ -7,6 +7,7 @@ const postsRouter =require('../src/routes/posts');
 // const leaderBordRouter =require('../src/routes/leaderborad');
 const authRouter = require('../src/routes/auth.routes');
 const searchRouter = require('../src/routes/searchRoute');
+const communitiesListRouter = require('../src/routes/communitiesList');
 
 
 
@@ -40,6 +41,7 @@ app.use(postsRouter);
 // app.use(leaderBordRouter);
 app.use(authRouter);
 app.use(searchRouter);
+app.use(communitiesListRouter);
 
 
 

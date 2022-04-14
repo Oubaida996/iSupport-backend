@@ -34,7 +34,7 @@ async function postUsersHandler(req, res) {
 
 //Get All Users
 async function getUsersHandler(req, res) {
-   let users = await database.users.findAll();
+   let users = await database.users.findAll({include :[database.communities]});
 
   res.status(200).json(users);
 }

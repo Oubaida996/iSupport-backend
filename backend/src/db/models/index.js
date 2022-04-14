@@ -55,9 +55,11 @@ db.moderators.belongsTo(db.users ,{foreignKey: 'user_id' ,targetKey :'id'});
 db.communities.hasMany(db.posts,{foreignKey: 'community_id' ,sourceKey :'id'});
 db.posts.belongsTo(db.communities,{foreignKey: 'community_id' ,targetKey :'id'});
 
- db.communities.hasMany(db.moderators, { foreginKey: "community_id",sourceKey :'id' });
- db.moderators.belongsTo(db.communities,{foreignKey: 'community_id' ,targetKey :'id'});
+//  db.moderators.hasMany(db.communities, { foreginKey: "community_id",sourceKey :'id' });
+//  db.communities.belongsTo(db.moderators,{foreignKey: 'community_id' ,targetKey :'id'});
 
+//  db.moderators.hasMany(db.users, { foreginKey: "user_id",sourceKey :'id' });
+//  db.users.belongsTo(db.moderators,{foreignKey: 'user_id' ,targetKey :'id'});
 
 
 db.sequelize = sequelize;

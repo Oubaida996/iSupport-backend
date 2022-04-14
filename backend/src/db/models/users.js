@@ -69,13 +69,16 @@ module.exports = (sequelize, DataTypes) => {
   Users.authenticateBasic = async function (username, password) {
     
     const user = await this.findOne({ where: { username } });//username:username
-    console.log(user);
+    // console.log(user);
     const valid = await bcrypt.compare(password, user.password);
-    console.log(valid);
+    // console.log(valid);
     if (valid) {
       // generate a new token
-      let exp = Math.floor(Date.now() / 1000) + 600;// time to destroy token
-      let newToken = jwt.sign({exp:exp, username: user.username }, API_SECRET);
+      
+      // let exp = Math.floor(Date.now() / 1000) + 600;// time to destroy token
+      // let newToken = jwt.sign({exp:exp, username: user.username }, API_SECRET);
+      
+      let newToken = jwt.sign({ username: user.username }, API_SECRET);//delete this line after test
       user.token = newToken;
       return user;
     } else {

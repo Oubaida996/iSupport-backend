@@ -13,7 +13,7 @@ async function basicAuth(req, res, next) {
     console.log(username ,password);
     try {
       let validUser = await  database.users.authenticateBasic(username,password); 
-      console.log(validUser);
+      // console.log(validUser);
       if (validUser) {
         req.user =validUser;
     

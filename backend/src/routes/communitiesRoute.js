@@ -10,7 +10,12 @@ router.get("/communities",bearerAuth, aclAuth('edit all') ,getAlCommunities);
 
 async function getAlCommunities(req, res) {
   let allData = await database.communities.findAll({include :[database.users ,database.posts]});
-  res.status(200).send(allData);
+  if (allData) {
+    res.status(200).json(allData);
+  } else {
+    res.status(500).json(`the   community_id ${cid} isn\'t exist`);
+  }
+  
   
 }
 

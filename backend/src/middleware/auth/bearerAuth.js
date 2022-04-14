@@ -16,6 +16,7 @@ const bearerAuth = async (req, res, next) => {
         let user = await database.users.authenticateBearer(token);
         if(user){
           req.user =user;
+          // req.user.token=token;
           next();
         }else{
           res.status(500).send('please login again ,invalid token');
