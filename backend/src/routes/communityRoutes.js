@@ -4,7 +4,7 @@ const database = require("../db/models/index");
 const router = express.Router();
 
 router.get("/community/:id", getCommunity);
-router.post("/community", createCommunity);
+router.post("/create-community", createCommunity);
 
 async function createCommunity(req, res) {
   let body = req.body;
@@ -14,7 +14,10 @@ async function createCommunity(req, res) {
     let createdData = await database.communities.create(req.body);
     console.log(createdData);
     if (createdData) {
-      let community =await database.communities.findOne({ where: { id: createdData.id }, include: [database.users, database.posts] });
+      let community = await database.communities.findOne({
+        where: { id: createdData.id },
+        include: [database.users, database.posts],
+      });
       console.log(community);
       res.status(200).json(community);
     } else {
@@ -23,19 +26,19 @@ async function createCommunity(req, res) {
   } else {
     res.status(500).send(`To do that you should register`);
   }
-
 }
 
 async function getCommunity(req, res) {
   let id = req.params.id;
-  let allData = await database.communities.findOne({ where: { id: id }, include: [database.users, database.posts] });
+  let allData = await database.communities.findOne({
+    where: { id: id },
+    include: [database.users, database.posts],
+  });
   if (allData) {
     res.status(200).json(allData);
   } else {
     res.status(500).send(`the   community_id ${cid} isn\'t exist`);
   }
-
-
 }
 
 module.exports = router;
