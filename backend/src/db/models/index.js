@@ -43,22 +43,20 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-db.users.hasMany(db.communities ,{foreignKey: 'user_id' ,sourceKey :'id'});
-db.communities.belongsTo(db.users,{foreignKey: 'user_id' ,targetKey :'id'});
+db.users.hasMany(db.communities, { foreignKey: "user_id" });
+db.communities.belongsTo(db.users, { foreignKey: "user_id" });
 
-db.users.hasMany(db.posts ,{foreignKey: 'author' ,sourceKey :'id'});
-db.posts.belongsTo(db.users,{foreignKey: 'author' ,targetKey :'id'});
+db.users.hasMany(db.posts, { foreignKey: "author" });
+db.posts.belongsTo(db.users, { foreignKey: "author" });
 
-db.users.hasMany(db.moderators ,{foreignKey: 'user_id' ,sourceKey :'id'});
-db.moderators.belongsTo(db.users ,{foreignKey: 'user_id' ,targetKey :'id'});
+db.users.hasMany(db.moderators, { foreignKey: "user_id" });
+db.moderators.belongsTo(db.users, { foreignKey: "user_id" });
 
-db.communities.hasMany(db.posts,{foreignKey: 'community_id' ,sourceKey :'id'});
-db.posts.belongsTo(db.communities,{foreignKey: 'community_id' ,targetKey :'id'});
+db.communities.hasMany(db.posts, { foreignKey: "community_id" });
+db.posts.belongsTo(db.communities, { foreignKey: "community_id" });
 
- db.communities.hasMany(db.moderators, { foreginKey: "community_id",sourceKey :'id' });
- db.moderators.belongsTo(db.communities,{foreignKey: 'community_id' ,targetKey :'id'});
-
-
+db.communities.hasMany(db.moderators, { foreginKey: "community_id" });
+db.moderators.belongsTo(db.communities, { foreignKey: "community_id" });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
