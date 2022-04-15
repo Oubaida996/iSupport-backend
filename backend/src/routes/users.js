@@ -3,7 +3,7 @@
 const express = require('express');
 const database = require('../db/models/index'); //just fix the path
 const router = express.Router();
-
+const bcrypt =require('bcrypt');
 // Users Route
 router.post("/users", postUsersHandler);
 router.get("/users", getUsersHandler);
@@ -18,6 +18,7 @@ router.delete("/users/:id", deleteUserHandler);
 //Get All Users
 async function postUsersHandler(req, res) {
   let body =req.body;
+  req.body.password = await bcrypt.hash(req.body.password, 5);
   let user = await database.users.create(body);
   if (user) {
      let getUser =await database.users.findByPk(user.id);
@@ -33,7 +34,7 @@ async function postUsersHandler(req, res) {
 
 //Get All Users
 async function getUsersHandler(req, res) {
-   let users = await database.users.findAll();
+   let users = await database.users.findAll({include :[database.communities]});
 
   res.status(200).json(users);
 }

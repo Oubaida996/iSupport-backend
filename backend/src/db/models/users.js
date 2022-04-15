@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Users.init(
     {
-      user_id: {
-        primaryKey: true,
-        autoIncrement: true,
-        type: DataTypes.INTEGER,
-      },
+      // user_id: {
+      //   primaryKey: true,
+      //   autoIncrement: true,
+      //   type: DataTypes.INTEGER,
+      // },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -67,16 +67,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Users.authenticateBasic = async function (username, password) {
-    const user = await this.findOne({ where: { username } });
+    
+    const user = await this.findOne({ where: { username } });//username:username
+    // console.log(user);
     const valid = await bcrypt.compare(password, user.password);
+    // console.log(valid);
     if (valid) {
-      let newToken = jwt.sign({ username: user.username }, API_SECRET);
+      // generate a new token
+      
+      // let exp = Math.floor(Date.now() / 1000) + 600;// time to destroy token
+      // let newToken = jwt.sign({exp:exp, username: user.username }, API_SECRET);
+      
+      let newToken = jwt.sign({ username: user.username }, API_SECRET);//delete this line after test
       user.token = newToken;
       return user;
     } else {
       throw new Error("Invalid User");
     }
   };
+
+
   Users.authenticateBearer = async function (token) {
     const parsedToken = jwt.verify(token, API_SECRET);
     const user = await this.findOne({

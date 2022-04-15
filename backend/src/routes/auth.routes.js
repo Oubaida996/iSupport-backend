@@ -2,53 +2,49 @@
 
 const express = require("express");
 const router = express.Router();
-//???
-const db = require("../db/models/users");
 
-const bcrypt = require("bcrypt");
-const basicAuth = require("../middleware/auth/basicAuth");
-const UserControll = require("../controllers/userControll");
-const check = require("check");
+
+const database = require('../db/models/index');
+
+const bcrypt = require('bcrypt');
+const basicAuth = require('../middleware/auth/basicAuth');
+const UserControll = require('../controllers/userControll');
+// const check = require('check');
+const aclAuth =require('../middleware/auth/aclAuth');
+const bearerAuth =require('../middleware/auth/bearerAuth');
 
 // Routes:
 // signin,signup
-router.post("/signup", signupFunc);
-router.post("/signin", basicAuth(db.Users), signinFunc);
+router.post('/signup', signupFunc);
+router.post('/signin', basicAuth, signinFunc);
 //logout
-router.get("/logout/:id", UserControll.userLogout);
+router.get('/user/logout/:id',bearerAuth, UserControll.userLogout);
 
 // delete user
-router.delete("/delete-user/:id", UserControll.DeleteUser);
+router.delete('/user/delete/:id',bearerAuth,aclAuth('read'),UserControll.DeleteUser);
 
 // update user data
-router.put("/update-user/:id", UserControll.updateUser);
+router.put('/user/update/:id',bearerAuth,aclAuth('read'),UserControll.updateUser);
 
 // change  passworde
-router.post(
-  "/change-password/:id",
-  [
-    check("password")
-      .matches(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/)
-      .withMessage("must contain at least 8 char character"),
-  ],
-  UserControll.changePassword
-);
+// router.post('/:id/change',[check('password').matches(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/).withMessage('must contain at least 8 char character')],UserControll.changePassword);
 
 // function:
 // signup Function
-async function signupFunc(request, response) {
-  try {
-    request.body.password = await bcrypt.hash(request.body.password, 5);
-    const record = await db.Users.create(request.body);
-    response.status(201).json(record);
-  } catch (error) {
-    response.status(403).send("Error occurred");
-  }
+async function signupFunc(req, res) {
+    try {
+        req.body.password = await bcrypt.hash(req.body.password, 5);
+        const record = await database.users.create(req.body);
+        res.status(201).json(record);
+    } catch (error) {
+        res.status(403).send("Error occurred");
+    }
 }
 
 // signin Function
-function signinFunc(request, response) {
-  response.status(200).json(request.db.Users);
+function signinFunc(req, res) {
+    
+    res.status(200).json(req.user);
 }
 
 module.exports = router;
