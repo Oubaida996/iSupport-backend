@@ -11,7 +11,7 @@ const {
 
 const io = require("socket.io")(4444, {
   cors: {
-    origin: ["http://localhost:5500", "https://admin.socket.io/"],
+    origin: "*",
   },
 });
 // const chatConnection = io.connect(`${host}/chat`);
@@ -25,15 +25,13 @@ function getCurrentTime() {
   let chatTime = hour + ":" + min + " ";
   return chatTime;
 }
-console.log("this looks good");
 // when clinet get connect run
 io.on("connection", (socket) => {
   console.log("connected");
-  socket.on("joinRoom", ({ username, community_id }) => {
-    const user = userJoin(socket.id, username, community_id);
+  socket.on("joinRoom", ({ username, communityID }) => {
+    const user = userJoin(socket.id, username, communityID);
     socket.join(user.community_id);
     console.log(user.community_id);
-    console.log(user.username);
 
     // to see the chat history
     // we need to create chat database
