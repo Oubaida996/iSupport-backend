@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 const express = require("express");
 const userRouter =require('../src/routes/users');
 const communityRouter =require('../src/routes/communityRoutes');
@@ -8,6 +8,7 @@ const postsRouter =require('../src/routes/posts');
 const authRouter = require('../src/routes/auth.routes');
 const searchRouter = require('../src/routes/searchRoute');
 const communitiesListRouter = require('../src/routes/communitiesList');
+
 
 
 
@@ -25,13 +26,14 @@ const start = (port) => {
 };
 
 // middleware & static files
-
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
+app.use(express.static(__dirname + "/public/"));
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.status(200).send("server is up and running");
 });
-
 
 //router
 app.use(userRouter);
@@ -42,8 +44,7 @@ app.use(postsRouter);
 app.use(authRouter);
 app.use(searchRouter);
 app.use(communitiesListRouter);
-
-
+app.use(liveChat);
 
 
 // app.use("*", notFoundHandler);

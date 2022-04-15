@@ -23,6 +23,7 @@ const bearerAuth = async (req, res, next) => {
         }
       } catch (error) {
         res.status(403).send(`Error from bearerAuth: ${error} `);
+
       }
 
       // const parsedToken = jwt.verify(token, SECRET);
