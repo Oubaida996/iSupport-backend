@@ -13,7 +13,7 @@ router.delete("/community/:id", bearerAuth, aclAuth('delete'), deleteCommunity);
 
 async function createCommunity(req, res) {
   let body = req.body;
-  let user = await database.users.findByPk(body.user_id);
+  let user = await database.users.findByPk(req.user.id);
   // console.log('create community', user.communities);
   if (user) {
     let createdData = await database.communities.create(req.body);

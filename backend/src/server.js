@@ -44,7 +44,7 @@ app.use(postsRouter);
 app.use(authRouter);
 app.use(searchRouter);
 app.use(communitiesListRouter);
-app.use(liveChat);
+// app.use(liveChat);
 
 
 // app.use("*", notFoundHandler);

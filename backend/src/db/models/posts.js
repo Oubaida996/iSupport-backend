@@ -12,12 +12,12 @@ const Posts = (db, DataTypes) =>
     },
     author: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       // foreginKey: true,
     },
     community_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
   });
 
