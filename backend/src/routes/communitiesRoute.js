@@ -5,7 +5,7 @@ const router = express.Router();
 const aclAuth =require('../middleware/auth/aclAuth');
 const bearerAuth =require('../middleware/auth/bearerAuth');
 
-router.get("/communities",bearerAuth, aclAuth('edit all') ,getAlCommunities);
+router.get("/communities",bearerAuth, aclAuth('read') ,getAlCommunities);
 
 
 async function getAlCommunities(req, res) {

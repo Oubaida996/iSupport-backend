@@ -11,11 +11,11 @@ const Communities = (db, DataTypes) => db.define('communities', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+    // user_id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
 
-    },
+    // },
 
 });
 
