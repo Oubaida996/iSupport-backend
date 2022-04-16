@@ -12,6 +12,7 @@ const liveChat = require("./routes/live-chat.route");
 const videoChat = require("./routes/video-chat.route");
 const leaderboardRoute = require("./routes/leaderborad");
 const personalProgress = require("./routes/personalProgress");
+const joinCommunity = require("./routes/joinCommunity.route");
 require("./chat-app/server");
 require("./video-chat-app/server");
 // const notFoundHandler = require("./middleware/404");
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 app.use(userRouter);
 app.use(communityRouter);
 app.use(communitiesRouter);
+app.use(joinCommunity);
 app.use(postsRouter);
 app.use(leaderboardRoute);
 app.use(authRouter);
