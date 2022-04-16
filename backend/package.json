@@ -20,10 +20,12 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
+    "peer": "^0.6.1",
     "pg": "^8.7.3",
     "sequelize": "^6.18.0",
     "socket.io": "^4.4.1",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "jest": "^27.5.1",
