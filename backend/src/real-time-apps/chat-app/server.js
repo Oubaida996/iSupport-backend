@@ -1,6 +1,6 @@
 "use strict";
 
-const database = require("../db/models/index");
+const database = require("../../db/models/index");
 const message = require("./message");
 const {
   userJoin,

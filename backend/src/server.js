@@ -7,22 +7,22 @@ const app = express();
 
 // Routes & Dependencies
 
-const userRouter = require("../src/routes/users");
-const communityRouter = require("../src/routes/communityRoutes");
-const communitiesRouter = require("../src/routes/communitiesRoute");
-const postsRouter = require("../src/routes/posts");
-const authRouter = require("../src/routes/auth.routes");
-const searchRouter = require("../src/routes/searchRoute");
-const communitiesListRouter = require("../src/routes/communitiesList");
-const liveChat = require("./routes/live-chat.route");
-const videoChat = require("./routes/video-chat.route");
-const leaderboardRoute = require("./routes/leaderborad");
-const personalProgress = require("./routes/personalProgress");
-const joinCommunity = require("./routes/joinCommunity.route");
+const userRouter = require("../src/routes/user-routes/users");
+const communityRouter = require("../src/routes/communities-routes/community.route");
+const communitiesRouter = require("../src/routes/communities-routes/getAllCommunities.route");
+const postsRouter = require("../src/routes/community/posts");
+const authRouter = require("../src/routes/user-routes/auth-routes/auth.routes");
+const searchRouter = require("../src/routes/communities-routes/searchRoute");
+const communitiesListRouter = require("../src/routes/communities-routes/communitiesList.route");
+const liveChat = require("./routes/real-time-features-routes/live-chat.route");
+const videoChat = require("./routes/real-time-features-routes/video-chat.route");
+const leaderboardRoute = require("./routes/community/leaderborad");
+const personalProgress = require("./routes/community/personalProgress");
+const joinCommunity = require("./routes/communities-routes/joinCommunity.route");
 const notFoundHandler = require("./middleware/error-handlers/404");
 const errorHandler = require("./middleware/error-handlers/500");
 const cors = require("cors");
-require("./chat-app/server");
+require("./real-time-apps/chat-app/server");
 require("./real-time-apps/video-chat-app/server");
 
 // Middlewares
