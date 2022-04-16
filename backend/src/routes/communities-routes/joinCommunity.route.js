@@ -1,7 +1,7 @@
 const express = require("express");
-const database = require("../db/models/index");
+const database = require("../../db/models/index");
 const router = express.Router();
-const bearerAuth = require("../middleware/auth/bearerAuth");
+const bearerAuth = require("../../middleware/auth/bearerAuth");
 
 // Logged in user home routes
 router.get("/join-community/:id", bearerAuth, getCommunityLeaderboard);

@@ -1,7 +1,7 @@
 "use strict";
 const express = require("express");
-const database = require("../db/models/index");
-const bearerAuth = require("../middleware/auth/bearerAuth");
+const database = require("../../db/models/index");
+const bearerAuth = require("../../middleware/auth/bearerAuth");
 const router = express.Router();
 
 // Logged in user home routes

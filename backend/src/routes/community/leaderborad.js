@@ -1,5 +1,5 @@
 const express = require("express");
-const database = require("../db/models/index");
+const database = require("../../db/models/index");
 const router = express.Router();
 
 // Logged in user home routes

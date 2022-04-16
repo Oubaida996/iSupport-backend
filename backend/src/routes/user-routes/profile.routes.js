@@ -1,8 +1,8 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
-const db = require("../db/models/users");
-const basicAuth = require("../middleware/auth/basicAuth");
+const db = require("../../db/models/users");
+const basicAuth = require("../../middleware/auth/basicAuth");
 
 // profile page
 router.get("/profile", basicAuth(db.Users), async (req, res) => {

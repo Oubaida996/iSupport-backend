@@ -1,5 +1,5 @@
 const express = require("express");
-const database = require("../db/models/index");
+const database = require("../../db/models/index");
 const router = express.Router();
 
 // Logged in user home routes
@@ -17,7 +17,6 @@ async function getUserCommunitiesList(req, res) {
   } else {
     res.status(500).json(`the   community_id ${cid} isn\'t exist`);
   }
-
 }
 
 module.exports = router;

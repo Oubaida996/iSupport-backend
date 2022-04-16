@@ -1,6 +1,6 @@
 "use strict";
 const express = require("express");
-const database = require("../db/models/index");
+const database = require("../../db/models/index");
 const router = express.Router();
 const { QueryTypes } = require("sequelize");
 
