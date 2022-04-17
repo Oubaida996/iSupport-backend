@@ -10,6 +10,8 @@ const app = express();
 const userRouter = require("../src/routes/user-routes/users");
 const communityRouter = require("../src/routes/communities-routes/community.route");
 const communitiesRouter = require("../src/routes/communities-routes/getAllCommunities.route");
+const trendingCommunities = require("../src/routes/communities-routes/trendingCommunityRoute");
+
 const postsRouter = require("../src/routes/community/posts");
 const authRouter = require("../src/routes/user-routes/auth-routes/auth.routes");
 const searchRouter = require("../src/routes/communities-routes/searchRoute");
@@ -50,6 +52,7 @@ app.use(communitiesRouter);
 app.use(joinCommunity);
 app.use(postsRouter);
 app.use(leaderboardRoute);
+app.use(trendingCommunities);
 app.use(authRouter);
 app.use(searchRouter);
 app.use(communitiesListRouter);
