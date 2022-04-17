@@ -51,17 +51,7 @@ db.communities.belongsToMany(db.users, {
   through: db.users_communities,
   foreignKey: "community_id",
 });
-// db.users_communities.belongsTo(db.users);
-// db.users_communities.belongsTo(db.communities);
-// db.users.hasMany(db.users_communities);
-// db.communities.hasMany(db.users_communities);
 
-// db.posts.belongsToMany(db.users_communities ,{through :db.posts_communities_users ,foreignKey:"post_id"} );
-// db.users_communities.belongsToMany(db.posts ,{through :db.posts_communities_users ,foreignKey:"user_community_id"} );
-// db.posts_communities_users.belongsTo(db.posts);
-// db.posts_communities_users.belongsTo(db.users_communities);
-// db.posts.hasMany(db.posts_communities_users);
-// db.users_communities.hasMany(db.posts_communities_users);
 
 // db.users.hasMany(db.posts, { foreignKey: "author" });
 // db.posts.belongsTo(db.users, { foreignKey: "author" });
