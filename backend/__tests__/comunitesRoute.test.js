@@ -5,18 +5,18 @@ const supertest = require("supertest");
 const db = require("../src/db/models/index");
 const request = supertest(server.app);
 
-// let Users = {
-//   admin: { username: "admin", password: "password", role: "admin" },
-//   moderator: { username: "editor", password: "password", role: "moderator" },
-//   user: { username: "user", password: "password", role: "user" },
-// };
+let Users = {
+  admin: { username: "admin", password: "password", role: "admin" },
+  moderator: { username: "editor", password: "password", role: "moderator" },
+  user: { username: "user", password: "password", role: "user" },
+};
 beforeAll(async () => {
-  await db.sync();
+  await db.sequelize.sync();
 });
 afterAll(async () => {
-  await db.drop();
+  await db.sequelize.drop();
 });
-// Object.keys(Users).forEach((element) => {
+Object.keys(Users).forEach((element) => {
   describe("testing  comunites route", () => {
     it("testing get all comunites fron database", async () => {
       let Auth = await request
@@ -29,4 +29,4 @@ afterAll(async () => {
       expect(response.status).toEqual(200);
     });
   });
-// });
+});

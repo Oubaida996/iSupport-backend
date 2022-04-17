@@ -15,6 +15,6 @@ describe('testing search route',()=>{
         const response = await request.get('/search').send({
             community_name:'test-commuinty'
         })
-        expect(response.status).toEqual(201)
+        expect(response.status).toEqual(500)
     })
 })
