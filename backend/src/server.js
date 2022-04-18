@@ -30,11 +30,6 @@ require("./real-time-apps/video-chat-app/server");
 app.use(cors());
 app.use(express.json());
 
-// connect to sequelize & listen for requests
-const start = (port) => {
-  app.listen(port, () => console.log(`Running on Port ${port}`));
-};
-
 //  Static Files
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -63,6 +58,11 @@ app.use(personalProgress);
 
 app.use("*", notFoundHandler);
 app.use(errorHandler);
+
+// connect to sequelize & listen for requests
+const start = (port) => {
+  app.listen(port, () => console.log(`Running on Port ${port}`));
+};
 
 module.exports = {
   app: app,

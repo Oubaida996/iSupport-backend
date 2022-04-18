@@ -12,14 +12,11 @@ async function getpersonalProgress(req, res) {
   let id = parseInt(req.params.id);
   let userid = req.user.dataValues.id;
   const personalProgress = await database.posts.findAll({
-    attributes: [
-      database.sequelize.fn("COUNT", database.sequelize.col("author")),
-    ],
-    group: "author",
+    // attributes: ["author"],
+    // group: "author",
     where: { community_id: id, author: userid },
   });
-
-  res.status(200).json(personalProgress);
+  res.status(200).json(personalProgress.length);
 }
 
 module.exports = router;

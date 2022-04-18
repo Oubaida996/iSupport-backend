@@ -10,7 +10,7 @@ async function getCommunityLeaderboard(req, res) {
   let id = parseInt(req.params.id);
   const leaderBoardResults = await database.posts.findAll({
     attributes: ["author"],
-    group: "author",
+    group: ["author"],
     order: [database.sequelize.fn("COUNT", database.sequelize.col("author"))],
     limit: 5,
     where: { community_id: id },

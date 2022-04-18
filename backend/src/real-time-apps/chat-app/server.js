@@ -1,6 +1,5 @@
 "use strict";
 
-
 const database = require("../../db/models/index");
 const message = require("./message");
 const {
@@ -32,38 +31,36 @@ io.on("connection", (socket) => {
   socket.on("joinRoom", ({ username, communityID }) => {
     const user = userJoin(socket.id, username, communityID);
     socket.join(user.community_id);
-    console.log("----------------------------------------++",user.community_id);
-
     // to see the chat history
     // we need to create chat database
     async function getChatHistory() {
-      // {where:{community_id:communityID}}
-      // add the where clause after popping the DB with some dummy data
-      // let test =  await database.chat.findAll();
-      // console.log("test1 -------------",test);
-      // let test2 = await database.chat.findAll({where:{community_id:`${communityID}`}});
-      // console.log("test2 -------------",test2);
-      let chatHistory = await database.chat.findAll({where:{community_id:`${communityID}`}}).then((model) => {
-        for (let item of model) {
-          // console.log(item.chat_message);
-          let chatDate = new Date(item.createdAt);
-          let hour = chatDate.getHours();
-          let min = chatDate.getMinutes();
-          let chatTime = hour + ":" + min + " ";
-          socket.emit(
-            "message",
-            message(item.dataValues.username + " ", chatTime, item.dataValues.chat_message)
-          );
-          console.log(item.dataValues.username + " ", chatTime, item.dataValues.chat_message)
-        }
-
-        
-      });
-      
-    
+      let chatHistory = await database.chat
+        .findAll({ where: { community_id: `${communityID}` } })
+        .then((model) => {
+          for (let item of model) {
+            // console.log(item.chat_message);
+            let chatDate = new Date(item.createdAt);
+            let hour = chatDate.getHours();
+            let min = chatDate.getMinutes();
+            let chatTime = hour + ":" + min + " ";
+            socket.emit(
+              "message",
+              message(
+                item.dataValues.username + " ",
+                chatTime,
+                item.dataValues.chat_message
+              )
+            );
+            console.log(
+              item.dataValues.username + " ",
+              chatTime,
+              item.dataValues.chat_message
+            );
+          }
+        });
     }
     getChatHistory();
-   
+
     // welcome message
     socket.emit("message", message(" ", " ", "welcom to this community"));
 

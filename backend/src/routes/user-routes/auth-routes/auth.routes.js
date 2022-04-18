@@ -35,9 +35,6 @@ router.put(
   UserControll.updateUser
 );
 
-// change  passworde
-// router.post('/:id/change',[check('password').matches(/^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/).withMessage('must contain at least 8 char character')],UserControll.changePassword);
-
 // function:
 // signup Function
 async function signupFunc(req, res) {
