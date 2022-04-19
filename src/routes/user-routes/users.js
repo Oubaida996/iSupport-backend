@@ -51,7 +51,7 @@ async function getSingleUsersHandler(req, res) {
       joidAt: user.createdAt,
     });
   } else {
-    res.status(500).send(`the user_id ${uid} isn't exist`);
+    res.status(500).send(`the user doesn't exist`);
   }
 }
 
