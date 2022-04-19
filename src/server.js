@@ -31,7 +31,6 @@ const {
   leveCommunity,
   getUserCommunity,
 } = require("./real-time-apps/chat-app/user");
-// require("./real-time-apps/chat-app/server");
 require("./real-time-apps/video-chat-app/server");
 
 // Middlewares
@@ -172,7 +171,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-
 // Error Handlers
 
 app.use("*", notFoundHandler);
@@ -186,4 +184,5 @@ const start = (port) => {
 module.exports = {
   app: app,
   start: start,
+  http: http,
 };
