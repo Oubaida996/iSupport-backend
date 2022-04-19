@@ -92,7 +92,6 @@ io.on("connection", (socket) => {
         .findAll({ where: { community_id: `${communityID}` } })
         .then((model) => {
           for (let item of model) {
-            // console.log(item.chat_message);
             let chatDate = new Date(item.createdAt);
             let hour = chatDate.getHours();
             let min = chatDate.getMinutes();
