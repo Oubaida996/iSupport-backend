@@ -36,16 +36,5 @@ Object.keys(Users).forEach((element) => {
         expect(response.status).toBe(403);
       }
     });
-
-    it("testing get one community by id", async () => {
-      let Auth = await request
-        .post("/signin")
-        .auth(Users[element].username, Users[element].password);
-      let userToken = Auth.body.token;
-      const response = await request
-        .get(`/community/1`)
-        .set("Authorization", `Bearer ${userToken}`);
-      expect(response.status).toEqual(500);
-    });
   });
 });

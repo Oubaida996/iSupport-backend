@@ -12,7 +12,6 @@
       </div>
     </form>
     <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="/chat-app/frontend.js"></script> -->
     <script>
       let communityID = <%= community_id %>
 
@@ -21,7 +20,9 @@
       const roomInput = document.querySelector("#room-input");
       const form = document.querySelector("#form");
 
-      const socket = io("/");
+      const socket = io();
+
+
       const username = "test-user";
 
       socket.on("connect", () => {
@@ -46,7 +47,6 @@
       function displayMessage(message) {
 
         const div = document.createElement("div");
-        // message.time = `${message.username} @ ${message.time}: ${message.tex}`
         div.textContent = `${message.username} ${message.time}: ${message.text}`;
         document.querySelector("#message-container").append(div);
       }

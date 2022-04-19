@@ -15,16 +15,15 @@ async function searchcommunity(req, res) {
       },
     });
     if (getCommunity.length) {
-      console.log(getCommunity);
       res.status(201).json(getCommunity);
     } else {
-      res.status(201).json(`The Community isn't exist`);
+      res.status(201).json(`The Community doesn't exist`);
     }
   } else {
     res
       .status(500)
       .json(
-        `you should insert the query like ' /search/?community_name=nameofcommunity '`
+        `you should insert the query as ' /search/?community_name=nameofcommunity '`
       );
   }
 }

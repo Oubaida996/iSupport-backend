@@ -9,7 +9,7 @@
     </script>
     <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
 
-    <script src="http://localhost:5555/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <title>Document</title>
     <style>
       #video-grid {
@@ -29,7 +29,7 @@
     <div id="video-grid"></div>
   </body>
   <script>
-    const socket = io("http://localhost:5555");
+    const socket = io();
     const videoGrid = document.getElementById("video-grid");
     const myPeer = new Peer(undefined, {
       host: "/",

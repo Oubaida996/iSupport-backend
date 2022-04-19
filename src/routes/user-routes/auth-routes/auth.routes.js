@@ -41,7 +41,7 @@ async function signupFunc(req, res) {
   try {
     req.body.password = await bcrypt.hash(req.body.password, 5);
     const record = await database.users.create(req.body);
-    res.status(201).json(record);
+    res.status(201).send(`You have successfully signed up`);
   } catch (error) {
     res.status(403).send("Error occurred");
   }
@@ -49,7 +49,7 @@ async function signupFunc(req, res) {
 
 // signin Function
 function signinFunc(req, res) {
-  res.status(200).json(req.user);
+  res.status(200).json({ username: req.user.username, token: req.user.token });
 }
 
 module.exports = router;

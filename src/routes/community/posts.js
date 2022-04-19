@@ -96,16 +96,22 @@ async function getPostsHandler(req, res) {
 //Get single Posts
 async function getSinglePostsHandler(req, res) {
   const searchParameter = req.query.body;
-  console.log(searchParameter);
   const communityId = req.params.id;
-  const [fetchedPost, metadata] = await database.sequelize.query(
-    `SELECT * FROM posts WHERE post_body LIKE ${searchParameter}% AND community_id = ${communityId}`
-  );
-  console.log(fetchedPost);
-  if (fetchedPost) {
-    res.status(200).json(fetchedPost);
+  // const [fetchedPost, metadata] = await database.sequelize.query(
+  //   `SELECT * FROM posts WHERE post_body LIKE ${searchParameter}% AND community_id = ${communityId}`
+  // );
+  const posts = await database.posts.findAll({
+    where: {
+      community_id: communityId,
+      post_body: {
+        [database.Sequelize.Op.like]: `%${searchParameter}%`,
+      },
+    },
+  });
+  if (posts) {
+    res.status(200).json(posts);
   } else {
-    res.status(500).send(`the  post id ${pid} isn\'t exist`);
+    res.status(500).send(`the  post doesn't exist`);
   }
 }
 //Update single Posts
