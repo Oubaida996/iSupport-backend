@@ -64,6 +64,7 @@ async function createPostHandler(req, res) {
   let user = await database.users.findOne({
     username: req.user.dataValues.username,
   });
+  console.log(req.user.dataValues.id);
   if (user) {
     let createdPost = await database.posts.create({
       ...body,
@@ -75,9 +76,7 @@ async function createPostHandler(req, res) {
         where: { id: createdPost.id },
         include: [database.users, database.communities],
       });
-      res
-        .status(200)
-        .json({ id: post.id, title: post.post_title, body: post.post_body });
+      res.status(200).json(post);
     } else {
       res.status(500).send(`the   post can not created`);
     }
@@ -92,44 +91,19 @@ async function getPostsHandler(req, res) {
   let fetchedPost = await database.posts.findAll({
     where: { community_id: communityId },
   });
-  let result = fetchedPost.map((ele) => {
-    let output = {
-      id: ele.id,
-      title: ele.post_title,
-      body: ele.post_body,
-      author: ele.author,
-      createdAt: ele.createdAt,
-    };
-    return output;
-  });
-
-  res.status(200).json(result);
+  res.status(200).json(fetchedPost);
 }
 //Get single Posts
 async function getSinglePostsHandler(req, res) {
-  const searchParameter = req.query.post;
+  const searchParameter = req.query.body;
   console.log(searchParameter);
   const communityId = req.params.id;
-  const fetchedPosts = await database.posts.findAll({
-    where: {
-      post_body: {
-        [database.Sequelize.Op.like]: `${searchParameter}%`,
-      },
-      community_id: communityId,
-    },
-  });
-  let output = fetchedPosts.map((ele) => {
-    let output = {
-      id: ele.id,
-      title: ele.post_title,
-      body: ele.post_body,
-      author: ele.author,
-      createdAt: ele.createdAt,
-    };
-    return output;
-  });
-  if (fetchedPosts) {
-    res.status(200).json(output);
+  const [fetchedPost, metadata] = await database.sequelize.query(
+    `SELECT * FROM posts WHERE post_body LIKE ${searchParameter}% AND community_id = ${communityId}`
+  );
+  console.log(fetchedPost);
+  if (fetchedPost) {
+    res.status(200).json(fetchedPost);
   } else {
     res.status(500).send(`the  post id ${pid} isn\'t exist`);
   }
@@ -161,7 +135,9 @@ async function deletePostHandler(req, res) {
   if (fetchedPost) {
     if (fetchedPost.author === req.user.id) {
       await database.posts.destroy({ where: { id: postId } });
-      res.status(201).send("deleted successfully");
+      res
+        .status(201)
+        .json({ fetchedPost: fetchedPost, message: "deleted successfully" });
     } else {
       res
         .status(204)
@@ -179,19 +155,10 @@ async function getPostsFromUserHandler(req, res) {
   let fetchedPosts = await database.posts.findAll({
     where: { author: userId },
   });
-  let output = fetchedPosts.map((ele) => {
-    let output = {
-      id: ele.id,
-      title: ele.post_title,
-      body: ele.post_body,
-      createdAt: ele.createdAt,
-    };
-    return output;
-  });
   if (fetchedPosts) {
-    res.status(200).json(output);
+    res.status(200).json(fetchedPosts);
   } else {
-    res.status(500).send(`you do not have any posts`);
+    res.status(500).send(`you does't have any posts`);
   }
 }
 
@@ -199,43 +166,26 @@ async function getPostsFromUserHandler(req, res) {
 async function getUserPostsFromCommunity(req, res) {
   let uid = parseInt(req.params.id);
   let cid = parseInt(req.params.cid);
-  let fetchedPosts = await database.posts.findAll({
+  let fetchedPost = await database.posts.findAll({
     where: { author: uid, community_id: cid },
   });
-  let output = fetchedPosts.map((ele) => {
-    let output = {
-      id: ele.id,
-      title: ele.post_title,
-      body: ele.post_body,
-      createdAt: ele.createdAt,
-    };
-    return output;
-  });
-  if (fetchedPosts) {
-    res.status(200).json(output);
+  if (fetchedPost) {
+    res.status(200).json(fetchedPost);
   } else {
-    res.status(500).send(`something went wrong`);
+    res
+      .status(500)
+      .send(`the  author_id ${uid} or community_id ${cid} aren\'t exist`);
   }
 }
 
 //Get All Posts from a single community
 async function getPostsFromCommunityHandler(req, res) {
   let communityId = parseInt(req.params.id);
-  let fetchedPosts = await database.posts.findAll({
+  let fetchedPost = await database.posts.findAll({
     where: { community_id: communityId },
   });
-  let output = fetchedPosts.map((ele) => {
-    let output = {
-      id: ele.id,
-      title: ele.post_title,
-      body: ele.post_body,
-      author: ele.author,
-      createdAt: ele.createdAt,
-    };
-    return output;
-  });
-  if (fetchedPosts) {
-    res.status(200).json(output);
+  if (fetchedPost) {
+    res.status(200).json(fetchedPost);
   } else {
     res.status(500).send(`the community_id ${cid} isn\'t exist`);
   }
