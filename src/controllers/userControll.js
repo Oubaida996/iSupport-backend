@@ -24,7 +24,6 @@ exports.DeleteUser = async (req, res, next) => {
       res.status(500).json(`the user id ${uid} isn\'t exist`);
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json(`error: ${error} from delete user end point `);
   }
 };
@@ -35,7 +34,6 @@ exports.updateUser = async (req, res, next) => {
 
   let fetchedUser = await database.users.findOne({ where: { id: uid } });
   req.body.password = await bcrypt.hash(req.body.password, 5);
-  // console.log(fetchedUser);
   if (fetchedUser) {
     let userUpdated = await db.users.update(
       {
@@ -48,13 +46,11 @@ exports.updateUser = async (req, res, next) => {
       { where: { id: uid } }
     );
 
-    console.log("userUpdated", userUpdated);
     if (userUpdated) {
       let fetchedUser = await database.users.findOne({ where: { id: uid } });
       res
         .status(200)
         .json({ message: "user have been Updeted", updateUser: fetchedUser });
-      // console.log(error);
     } else {
       res.status(500).json(` error: ${error} from update user`);
     }
@@ -71,7 +67,6 @@ exports.allUsers = async (req, res, next) => {
       res.status(200).json(result);
     })
     .catch((error) => {
-      console.log(error);
       res.status(500).json({ error: error });
     });
 };

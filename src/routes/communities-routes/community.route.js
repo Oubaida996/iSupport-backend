@@ -10,7 +10,7 @@ router.post("/community", bearerAuth, aclAuth("create"), createCommunity);
 router.delete("/community/:id", bearerAuth, aclAuth("delete"), deleteCommunity);
 
 async function createCommunity(req, res) {
-  let user = await database.users.findByPk(req.user.id);
+  let user = await database.users.findByPk(req.user.id); // ??
   if (user) {
     let createdData = await database.communities.create(req.body);
     if (createdData) {
@@ -29,7 +29,7 @@ async function createCommunity(req, res) {
 
       res.status(200).json(community);
     } else {
-      res.status(500).send(`the community can not created`);
+      res.status(500).send(`the community can not be created`);
     }
   } else {
     res.status(500).send(`To do that you should register`);
@@ -45,7 +45,7 @@ async function getCommunity(req, res) {
   if (fetchCommunity) {
     res.status(200).json(fetchCommunity);
   } else {
-    res.status(500).json(`the   community_id ${cid} isn\'t exist`);
+    res.status(500).json(`the community doesn't exist`);
   }
 }
 
@@ -62,7 +62,7 @@ async function deleteCommunity(req, res) {
       message: "deleted successfully",
     });
   } else {
-    res.status(500).json(`The community id ${cid} isn't exist`);
+    res.status(500).json(`the community doesn't exist`);
   }
 }
 

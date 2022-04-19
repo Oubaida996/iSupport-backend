@@ -1,17 +1,21 @@
-// const io = require("socket.io")(5555, {
-//   cors: {
-//     origin: "*",
-//   },
-// });
+const express = require("express");
+const app = express();
+const http = require("http").Server(app);
 
-// io.on("connection", (socket) => {
-//   console.log("CONNECTED");
-//   socket.on("join-room", (roomId, userId) => {
-//     socket.join(roomId);
-//     // socket.to(roomId).broadcast.emit("user-connected", userId);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "*",
+  },
+});
 
-//     socket.on("disconnect", () => {
-//       //   socket.to(roomId).broadcast.emit("user-disconnected", userId);
-//     });
-//   });
-// });
+io.on("connection", (socket) => {
+  console.log("CONNECTED");
+  socket.on("join-room", (roomId, userId) => {
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit("user-connected", userId);
+
+    socket.on("disconnect", () => {
+      socket.to(roomId).broadcast.emit("user-disconnected", userId);
+    });
+  });
+});

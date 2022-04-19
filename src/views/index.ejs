@@ -20,7 +20,9 @@
       const roomInput = document.querySelector("#room-input");
       const form = document.querySelector("#form");
 
-      const socket = io("/");
+      const socket = io();
+
+
       const username = "test-user";
 
       socket.on("connect", () => {
