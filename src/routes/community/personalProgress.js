@@ -4,9 +4,10 @@ const database = require("../../db/models/index");
 const bearerAuth = require("../../middleware/auth/bearerAuth");
 const router = express.Router();
 
+//Get User Personal List by community ID
 router.get("/community/:id/personalProgress", bearerAuth, getpersonalProgress);
 
-//Get User Communities List
+
 async function getpersonalProgress(req, res) {
   let id = parseInt(req.params.id);
   let userid = req.user.dataValues.id;

@@ -12,7 +12,6 @@ const UserControll = require("../../../controllers/userControll");
 const aclAuth = require("../../../middleware/auth/aclAuth");
 const bearerAuth = require("../../../middleware/auth/bearerAuth");
 
-// Routes:
 // signin,signup
 router.post("/signup", signupFunc);
 router.post("/signin", basicAuth, signinFunc);

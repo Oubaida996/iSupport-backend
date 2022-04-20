@@ -2,10 +2,10 @@ const express = require("express");
 const database = require("../../db/models/index");
 const router = express.Router();
 
-// Logged in user home routes
+//Get Community Leaderboard by Community ID
 router.get("/community/:id/leaderboard", getCommunityLeaderboard);
 
-//Get User Communities List
+
 async function getCommunityLeaderboard(req, res) {
   let id = parseInt(req.params.id);
   const result = await database.posts.findAll({
