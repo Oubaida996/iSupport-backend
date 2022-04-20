@@ -14,6 +14,8 @@ Team Name: **Error Makers**
 
 ## Project Overview & Problem Domain
 
+- We've noticed as a team that all of us have tried to build a new habit or get rid of an existing one but failed at least once in our lifetime. After researching the reasons we found that lack of commitment is the main reason behind this. Therefore the rule is simple enough. Commit to a personal or professional goal for 21 straight days. After three weeks, the pursuit of that goal should have become a habit. Once you've established that habit, you continue to do it for another ninety days. But how can you withstand all this span while you are suffering from the lack of commitment issues, encourgement is the asnwer if you get the right support and surround yourself with people how have the same goal. Support communities have been there since always but not everybody has access to them or some people have unique habits that only a few people around the world have them so it would be great to connect them together and provide access to the support communities for those who can't join them and that is exactly our goal.
+
 - This is a server for a yet to come full-stack application you can only access the API endpoints to get all the results needed for now.
 
 ## Project Wireframes
