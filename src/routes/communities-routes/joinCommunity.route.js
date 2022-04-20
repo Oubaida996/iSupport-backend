@@ -3,7 +3,7 @@ const database = require("../../db/models/index");
 const router = express.Router();
 const bearerAuth = require("../../middleware/auth/bearerAuth");
 
-// Logged in user home routes
+// Join Community by Community ID
 router.get("/join-community/:id", bearerAuth, getCommunityLeaderboard);
 
 //Get User Communities List
