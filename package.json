@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "A habit building platform that connects communities that share the same goal together, offering them a wide range of features such as creating communities, progress tracking, solo-goals and statistics.",
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node index.js ",
@@ -30,5 +30,14 @@
   "devDependencies": {
     "jest": "^27.5.1",
     "supertest": "^6.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Error-Makers/iSupport.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Error-Makers/iSupport/issues"
+  },
+  "homepage": "https://github.com/Error-Makers/iSupport#readme"
 }
