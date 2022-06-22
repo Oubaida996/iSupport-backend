@@ -11,14 +11,23 @@ async function trendingCommunity(req, res) {
     group: "community_id",
     order: [database.sequelize.fn("COUNT", database.sequelize.col("posts"))],
     limit: 5,
+
   });
   let trendingCommunitiesID = postsRaw.map((ele) => ele["community_id"]);
-  let communities = await database.communities.findAll();
+  let communities = await database.communities.findAll({
+    include: [database.users, database.posts],
+  });
   let returnedCommunitiesNames = communities
     .filter((ele) =>
       trendingCommunitiesID.indexOf(ele.dataValues.community_name)
     )
-    .map((ele) => ele["community_name"]);
+    .map((ele) => {
+      console.log({ ele });
+      return {
+        community_name: ele.community_name,
+        noOfusers: ele.users.length
+      }
+    });
   res.status(201).json(returnedCommunitiesNames);
 }
 

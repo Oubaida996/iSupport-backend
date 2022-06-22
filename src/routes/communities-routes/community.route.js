@@ -39,7 +39,7 @@ async function createCommunity(req, res) {
 async function getCommunity(req, res) {
   let cid = req.params.id;
   let fetchCommunity = await database.communities.findOne({
-    where: { id: cid },
+    where: { community_id: cid },
     include: [database.users, database.posts],
   });
   if (fetchCommunity) {
@@ -52,7 +52,7 @@ async function getCommunity(req, res) {
 async function deleteCommunity(req, res) {
   let cid = req.params.id;
   let fetchCommunity = await database.communities.findOne({
-    where: { id: cid },
+    where: { community_id: cid },
     include: [database.users, database, posts],
   });
   if (fetchCommunity) {

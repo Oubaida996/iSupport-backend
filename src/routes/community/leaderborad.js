@@ -11,27 +11,22 @@ async function getCommunityLeaderboard(req, res) {
   const result = await database.posts.findAll({
     attributes: [
       "author",
-      database.sequelize.fn("COUNT", database.sequelize.col("author")),
+      [database.sequelize.fn("COUNT", database.sequelize.col("author")), 'progress'],
     ],
-    group: ["author"],
+    group: ["author", "user.id"],
     order: [database.sequelize.fn("COUNT", database.sequelize.col("author"))],
-    limit: 5,
+    limit: 3,
+    include: [database.users],
     where: { community_id: id },
   });
-  let leaderBoardResults = result.map(async (ele) => {
-    let meta = await database.users.findOne({
-      where: { id: ele.author },
-    });
-    let output = {
-      user_id: meta.dataValues.id,
-      username: meta.dataValues.username,
-      firstname: meta.dataValues.firstName,
-      lastname: ele.lastName,
-      email: meta.dataValues.email,
-    };
-    return output;
-  });
-  res.status(200).json(result);
+
+  let response = result.map(ele => {
+    return {
+      username: ele.user.username,
+      progress: ele.dataValues.progress,
+    }
+  }).sort((a, b) => b.progress - a.progress);
+  res.status(200).json(response);
 }
 
 module.exports = router;
