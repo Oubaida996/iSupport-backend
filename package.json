@@ -1,46 +1,46 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "A habit building platform that connects communities that share the same goal together, offering them a wide range of features such as creating communities, progress tracking, solo-goals and statistics.",
-  "main": "server.js",
-  "scripts": {
-    "start": "NODE_ENV=production node index.js ",
-    "test": "NODE_ENV=test jest --verbose --silent"
-  },
-  "engines": {
-    "node": "16.x"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "base-64": "^1.0.0",
-    "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.3",
-    "express-session": "^1.17.2",
-    "express-validator": "^6.14.0",
-    "jsonwebtoken": "^8.5.1",
-    "nodemon": "^2.0.15",
-    "peer": "^0.6.1",
-    "pg": "^8.7.3",
-    "sequelize": "^6.18.0",
-    "socket.io": "^4.4.1",
-    "sqlite3": "^5.0.2",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "jest": "^27.5.1",
-    "supertest": "^6.2.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Error-Makers/iSupport.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/Error-Makers/iSupport/issues"
-  },
-  "homepage": "https://github.com/Error-Makers/iSupport#readme"
+    "name": "isupport",
+    "version": "1.0.0",
+    "description": "A habit building platform that connects communities that share the same goal together, offering them a wide range of features such as creating communities, progress tracking, solo-goals and statistics.",
+    "main": "index.js",
+    "scripts": {
+        "start": "NODE_ENV=production node index.js ",
+        "test": "NODE_ENV=test jest --verbose --silent"
+    },
+    "engines": {
+        "node": "16.x"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "base-64": "^1.0.0",
+        "bcrypt": "^5.0.1",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "ejs": "^3.1.6",
+        "express": "^4.17.3",
+        "express-session": "^1.17.2",
+        "express-validator": "^6.14.0",
+        "jsonwebtoken": "^8.5.1",
+        "nodemon": "^2.0.15",
+        "peer": "^0.6.1",
+        "pg": "^8.7.3",
+        "sequelize": "^6.18.0",
+        "socket.io": "^4.4.1",
+        "sqlite3": "^5.0.2",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "jest": "^27.5.1",
+        "supertest": "^6.2.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Oubaida996/iSupport-backend.git"
+    },
+    "keywords": [],
+    "bugs": {
+        "url": "https://github.com/Oubaida996/iSupport-backend/issues"
+    },
+    "homepage": "https://github.com/Oubaida996/iSupport-backend#readme"
 }
