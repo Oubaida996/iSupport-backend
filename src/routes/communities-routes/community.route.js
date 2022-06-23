@@ -53,7 +53,7 @@ async function deleteCommunity(req, res) {
   let cid = req.params.id;
   let fetchCommunity = await database.communities.findOne({
     where: { community_id: cid },
-    include: [database.users, database, posts],
+    include: [database.users, database.posts],
   });
   if (fetchCommunity) {
     await database.communities.destroy({ where: { id: cid } });
