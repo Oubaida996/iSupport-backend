@@ -15,11 +15,16 @@ const Communities = (db, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: false,
     },
+    community_banner: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     // user_id: {
     //     type: DataTypes.INTEGER,
     //     allowNull: false,
 
     // },
+
   });
 
 module.exports = Communities;
