@@ -26,6 +26,7 @@ async function getUsersHandler(req, res) {
       firstname: ele.firstName,
       lastname: ele.lastName,
       email: ele.email,
+      action: ele.actions,
       joidAt: ele.createdAt,
     };
     return output;
