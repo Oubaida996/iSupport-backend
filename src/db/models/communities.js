@@ -24,6 +24,7 @@ const Communities = (db, DataTypes) =>
     //     allowNull: false,
 
     // },
+
   });
 
 module.exports = Communities;
