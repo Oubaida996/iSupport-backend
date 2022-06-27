@@ -18,6 +18,10 @@ async function createCommunity(req, res) {
         where: { community_id: createdData.community_id },
         include: [database.users, database.posts],
       });
+      await database.users_communities.create({
+        user_id: req.user.id,
+        community_id: createdData.community_id,
+      });
       let modName = await database.users.findOne({
         where: { id: req.user.id },
       });
