@@ -49,6 +49,9 @@ async function signupFunc(req, res) {
 // signin Function
 function signinFunc(req, res) {
   res.status(200).json({
+    user_id: req.user.user_id,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
     username: req.user.username,
     token: req.user.token,
     actions: req.user.actions
