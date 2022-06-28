@@ -48,7 +48,11 @@ async function signupFunc(req, res) {
 
 // signin Function
 function signinFunc(req, res) {
-  res.status(200).json({ username: req.user.username, token: req.user.token });
+  res.status(200).json({
+    username: req.user.username,
+    token: req.user.token,
+    actions: req.user.actions
+  });
 }
 
 module.exports = router;
