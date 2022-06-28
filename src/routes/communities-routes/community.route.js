@@ -18,6 +18,10 @@ async function createCommunity(req, res) {
         where: { community_id: createdData.community_id },
         include: [database.users, database.posts],
       });
+      await database.users_communities.create({
+        user_id: req.user.id,
+        community_id: createdData.community_id,
+      });
       let modName = await database.users.findOne({
         where: { id: req.user.id },
       });
@@ -53,10 +57,10 @@ async function deleteCommunity(req, res) {
   let cid = req.params.id;
   let fetchCommunity = await database.communities.findOne({
     where: { community_id: cid },
-    include: [database.users, database.posts],
   });
   if (fetchCommunity) {
-    await database.communities.destroy({ where: { id: cid } });
+    await database.communities.destroy({ where: { community_id: cid } });
+    await database.posts.destroy({ where: { community_id: cid } });
     res.status(201).json({
       fetchCommunity: fetchCommunity,
       message: "deleted successfully",

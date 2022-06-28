@@ -26,6 +26,7 @@ async function getUsersHandler(req, res) {
       firstname: ele.firstName,
       lastname: ele.lastName,
       email: ele.email,
+      action: ele.actions,
       joidAt: ele.createdAt,
     };
     return output;
@@ -48,6 +49,7 @@ async function getSingleUsersHandler(req, res) {
       firstname: user.firstName,
       lastname: user.lastName,
       email: user.email,
+      communities: user.communities,
       joidAt: user.createdAt,
     });
   } else {
