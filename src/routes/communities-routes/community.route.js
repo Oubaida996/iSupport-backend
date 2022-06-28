@@ -59,11 +59,16 @@ async function deleteCommunity(req, res) {
     where: { community_id: cid },
   });
   if (fetchCommunity) {
-    await database.communities.destroy({ where: { community_id: cid } });
-    res.status(201).json({
-      fetchCommunity: fetchCommunity,
-      message: "deleted successfully",
-    });
+    try {
+      await database.communities.destroy({ where: { community_id: cid } });
+      res.status(201).json({
+        fetchCommunity: fetchCommunity,
+        message: "deleted successfully",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
   } else {
     res.status(500).json(`the community doesn't exist`);
   }
