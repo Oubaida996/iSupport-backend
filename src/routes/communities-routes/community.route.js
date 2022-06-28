@@ -60,6 +60,7 @@ async function deleteCommunity(req, res) {
   });
   if (fetchCommunity) {
     try {
+      await database.moderators.destroy({ where: { community_id: cid } });
       await database.communities.destroy({ where: { community_id: cid } });
       res.status(201).json({
         fetchCommunity: fetchCommunity,
