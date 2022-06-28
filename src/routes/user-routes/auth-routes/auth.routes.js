@@ -52,6 +52,7 @@ function signinFunc(req, res) {
     user_id: req.user.user_id,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
+    email: req.user.email,
     username: req.user.username,
     token: req.user.token,
     actions: req.user.actions
