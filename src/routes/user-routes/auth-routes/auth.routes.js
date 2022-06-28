@@ -49,7 +49,7 @@ async function signupFunc(req, res) {
 // signin Function
 function signinFunc(req, res) {
   res.status(200).json({
-    user_id: req.user.user_id,
+    user_id: req.user.id,
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     email: req.user.email,
