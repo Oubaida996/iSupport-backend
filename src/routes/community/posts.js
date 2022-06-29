@@ -88,32 +88,29 @@ async function createPostHandler(req, res) {
 
 //Get All Posts
 async function getPostsHandler(req, res) {
-  let communityId = req.params.id;
-  let fetchedPost = await database.posts.findAll({
-    where: { community_id: communityId },
-    include: [database.users]
-  });
-  // "id": 1,
-  //   "post_title": "don't smoke",
-  //   "post_body": "don;t smoke",
-  //   "author": 1,
-  //   "community_id": 2,
-  //   "createdAt": "2022-06-21T08:37:58.296Z",
-  //   "updatedAt": "2022-06-21T08:37:58.296Z",
-  //   "user":
-  let response = fetchedPost.map(ele => {
-    return {
-      id: ele.id,
-      post_title: ele.post_title,
-      post_body: ele.post_body,
-      author: ele.author,
-      author_name: ele.user.username,
-      communityId: ele.community_Id,
-      createdAt: ele.createdAt,
-      // updatedAt: ele.updatedAt,
-    }
-  })
-  res.status(200).json(response);
+  try {
+    let communityId = req.params.id;
+    let fetchedPost = await database.posts.findAll({
+      where: { community_id: communityId },
+      include: [database.users]
+    });
+    let response = fetchedPost.map(ele => {
+      return {
+        id: ele.id,
+        post_title: ele.post_title,
+        post_body: ele.post_body,
+        author: ele.author,
+        author_name: ele.user.username,
+        communityId: ele.community_Id,
+        createdAt: ele.createdAt,
+        // updatedAt: ele.updatedAt,
+      }
+    })
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+
 }
 //Get single Posts
 async function getSinglePostsHandler(req, res) {
