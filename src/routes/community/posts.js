@@ -16,7 +16,7 @@ router.get(
   "/community/:id/get-posts",
   bearerAuth,
   aclAuth("read"),
-  getPostsHandler
+  getPostsFromCommunityHandler
 );
 router.get(
   "/community/:id/search",
@@ -46,7 +46,7 @@ router.get(
   "/posts/community/:id",
   bearerAuth,
   aclAuth("read"),
-  getPostsFromCommunityHandler
+  getPostsHandler
 );
 router.get(
   "/user/:id/community/:cid",
@@ -70,7 +70,6 @@ async function createPostHandler(req, res) {
       ...body,
       community_id: communityId,
       author: req.user.dataValues.id,
-
     });
     if (createdPost) {
       let post = await database.posts.findOne({
@@ -92,9 +91,9 @@ async function getPostsHandler(req, res) {
     let communityId = req.params.id;
     let fetchedPost = await database.posts.findAll({
       where: { community_id: communityId },
-      include: [database.users]
+      include: [database.users],
     });
-    let response = fetchedPost.map(ele => {
+    let response = fetchedPost.map((ele) => {
       return {
         id: ele.id,
         post_title: ele.post_title,
@@ -103,14 +102,12 @@ async function getPostsHandler(req, res) {
         author_name: ele.user.username,
         communityId: ele.community_Id,
         createdAt: ele.createdAt,
-        // updatedAt: ele.updatedAt,
-      }
-    })
+      };
+    });
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json(error);
   }
-
 }
 //Get single Posts
 async function getSinglePostsHandler(req, res) {
